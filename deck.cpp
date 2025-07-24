@@ -11,7 +11,8 @@ deck::deck()
     {
         for (int j = 1; j < 14; j++)
         {
-            cards[i * 13 + (j - 1)] = card(j, i);
+            int roundedValue = j > 10 ? 10 : j;
+            cards[i * 13 + (j - 1)] = card({i, j, roundedValue});
         }
     }
 
@@ -46,7 +47,7 @@ card deck::drawCardForCut()
 void deck::printDeck()
 {
     for (auto i : cards) {
-        std::cout << i.getValue() << " " << i.getSuit() << std::endl;
+        std::cout << i.rank << " " << i.suit << std::endl;
     }
 }
 
