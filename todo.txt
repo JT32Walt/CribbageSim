@@ -1,5 +1,21 @@
-run some fucking tests
-game initalization and reset and required methods for it
-scorer
-test them
-detirmine and implament the method for pegging (new class? probably not)
+Recent Progess
+have changed card over to a struct, and made changes to keep the old behavior
+ran tests on deck to ensure it behaves properly
+
+TODO:
+write a scorer
+write a very basic handevaluator
+finish player functionality
+test player functionality
+
+test and fix the current written game functionality
+write the necessary things for pegging, scoring, and win checking
+extenisve testing of games
+
+inplament data collection
+sql lite for db (probably gonna be cmake in there ugh)
+
+write data ananlysis program (python)
+
+visualizations?
+writeup?
