@@ -47,8 +47,8 @@ void game::initializeRound()
         p2.dealCard(mainDeck.drawFromTop());
     }    
     //run the evaluators
-    handCribStruct p1Hand = ;//call to eval here
-    handCribStruct p2Hand = ;//call to eval here
+    handCribStruct p1Hand = p1.evaluate();//call to eval here
+    handCribStruct p2Hand = p2.evaluate();//call to eval here
     //put cards into crib
     //fuck it its 4 so just do it 4 times and not deal with the copy bullshit. You are going to see this later and hate it
     crib[0] = p1Hand.cribCards[0];
@@ -56,7 +56,7 @@ void game::initializeRound()
     crib[2] = p2Hand.cribCards[0];
     crib[3] = p2Hand.cribCards[1];
 
-    //sort the crib and their hands so we do not have to later
+    //sort the crib and their hands so we do not have to later, note for later, just use built in sort dumbass
 
 
     //do the cut
@@ -65,7 +65,7 @@ void game::initializeRound()
     if (cutCard.getValue() == 11) 
     {
         //give score to whoevers crib it is
-        //and i guess you have to check if anyone has won. actually everythime sobody scores you do
+        //and i guess you have to check if anyone has won. actually everythime sobody scores you do. Method? Method
     }
 }
 

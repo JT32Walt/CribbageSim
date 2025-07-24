@@ -26,8 +26,8 @@ private:
 public:
     player(/* args */);
     ~player();
-    void reset();
-    std::array<card,4> evaluate();
+    void reset(); //clears the hand and score
+    handCribStruct evaluate(); //runs the evaluator
     std::array<card,4> getHand();
     void dealCard(card dealtCard);
     void addscore(int score);
