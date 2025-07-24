@@ -47,7 +47,7 @@ card deck::drawCardForCut()
 void deck::printDeck()
 {
     for (auto i : cards) {
-        std::cout << i.rank << " " << i.suit << std::endl;
+        std::cout << i.rank << " " << i.suit << " " << i.value << "\n";
     }
 }
 

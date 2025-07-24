@@ -11,19 +11,19 @@ enum suit {
     CLUBS
 };
 
-typedef struct card {
+struct card {
     int suit; //uses suit enum
     int rank; //card rank: 1-13 (used for run detection and sorting)
     int value; //card points value: 1-10
 };
 
-typedef struct handCribStruct
+struct handCribStruct
 {
     std::array<card, 4> keptCards;
     std::array<card, 2> cribCards;
 };
 
-typedef struct gameDataStruct
+struct gameDataStruct
 {
     int p1Wins = 0;
     int p2Wins = 0;

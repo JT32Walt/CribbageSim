@@ -19,11 +19,4 @@ public:
     ~deck();
 };
 
-
-
-
-
-
-
-
 #endif

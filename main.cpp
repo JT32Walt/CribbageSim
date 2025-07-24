@@ -5,9 +5,9 @@ int main() {
     
     deck testDeck;
     card testCard;
-    //testDeck.printDeck();
+    testDeck.printDeck();
     testDeck.shuffle();
     //testDeck.printDeck();
-    testCard = testDeck.drawCardForCut();
+    //testCard = testDeck.drawCardForCut();
     return 0;
 }
