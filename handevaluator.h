@@ -1,7 +1,6 @@
 #ifndef HANDEVALUATOR_H
 #define HANDEVALUATOR_H
 #include <array>
-#include "card.h"
 
 class handevaluator
 {

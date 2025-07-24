@@ -3,7 +3,6 @@
 #include <array>
 #include "deck.h"
 #include "player.h"
-#include "card.h"
 
 /*
     GAME CLASS

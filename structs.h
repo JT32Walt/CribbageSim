@@ -2,7 +2,6 @@
 #define STRUCTS_H
 
 #include <array>
-#include "card.h"
 
 
 enum suit {
@@ -14,8 +13,8 @@ enum suit {
 
 typedef struct card {
     int suit; //uses suit enum
-    int value; //card points value: 1-10
     int rank; //card rank: 1-13 (used for run detection and sorting)
+    int value; //card points value: 1-10
 };
 
 typedef struct handCribStruct

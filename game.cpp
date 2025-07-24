@@ -22,12 +22,12 @@ void game::resetGame()
         card p1Card = mainDeck.drawCardForCut();
         card p2Card = mainDeck.drawCardForCut();
 
-        if (p1Card.getValue() < p2Card.getValue())
+        if (p1Card.value < p2Card.value)
         {
             curretCrib = PLAYER1;
             break;
         }
-        else if (p1Card.getValue() > p2Card.getValue())
+        else if (p1Card.value > p2Card.value)
         {
             curretCrib = PLAYER2;
             break;
@@ -62,7 +62,7 @@ void game::initializeRound()
     //do the cut
     cutCard = mainDeck.drawCardForCut();
     //jack check
-    if (cutCard.getValue() == 11) 
+    if (cutCard.value == 11) 
     {
         //give score to whoevers crib it is
         //and i guess you have to check if anyone has won. actually everythime sobody scores you do. Method? Method
