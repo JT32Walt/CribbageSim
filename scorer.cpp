@@ -1,0 +1,111 @@
+#include "scorer.h"
+
+int scoreHand(std::vector<card> hand, card cutCard, bool fullScore, bool isCrib) //used to score the hand, used by evaluators
+{
+    int score = 0;
+    if (isCrib && fullScore) // && fulscore implied
+    {
+
+    }
+    else
+    {
+        if (fullScore)
+        {
+
+        }
+        else
+        {
+            
+        }
+    }
+
+    score += scoreSetsOfTwo(hand);
+    score += scoreSetsOfThree(hand);
+    score += scoreSetsOfFour(hand);
+    if (fullScore)
+    {
+        score += scoreSetsOfFive(hand);
+    }
+    return score;
+}
+
+int scoreSetsOfTwo(std::vector<card> hand)
+{
+    int score = 0;
+    for (int i = 0; i < hand.size() - 1; i++)
+    {
+        for (int j = i + 1; j < hand.size(); j++)
+        {
+            if ((hand[i].rank == hand[j].rank) || (hand[i].value + hand[j].value == 15))
+            {
+                score = score + 2;
+            }
+        }
+    }
+}
+
+int scoreSetsOfThree(std::vector<card> hand)
+{
+    int score = 0;
+    int size = hand.size();
+    // there is not really not away to avoid the nesting
+    for (int i = 0; i < size - 2; i++)
+    {
+        for (int j = i + 1; j < size - 1; j++)
+        {
+            for (int k = j + 1; k < size; k++)
+            {
+                if (hand[i].value + hand[j].value + hand[k].value == 15)
+                {
+                    score += 2;
+                }
+
+                std::vector<int> ranks = {hand[i].rank, hand[j].rank, hand[k].rank};
+
+                if (ranks[1] == ranks[0] + 1 && ranks[2] == ranks[1] + 1)
+                {
+                    score += 3;
+                }
+            }
+        }
+    }
+    return score;
+}
+
+int scoreSetsOfFour(std::vector<card> hand)
+{
+    int score = 0;
+    int size = hand.size();
+    for (int i = 0; i < size - 3; i++)
+    {
+        for (int j = i + 1; j < size - 2; j++)
+        {
+            for (int k = j + 1; j < size - 1; k++)
+            {
+                for (int l = k + 1;  l < size; l++)
+                {
+                    if (hand[i].value + hand[j].value + hand[k].value + hand[l].value == 15)
+                    {
+                        score = score + 2;
+                    }
+
+                    std::vector<int> ranks = {hand[i].rank, hand[j].rank, hand[k].rank, hand[l].rank};
+
+                    if (ranks[1] == ranks[0] + 1 && ranks[2] == ranks[1] + 1 && ranks[3] == ranks[2] + 1)
+                    {
+                        score = score + 4;
+                    }
+                }
+            }
+        }
+    }
+}
+
+int scoreSetsOfFive(std::vector<card> hand)
+{
+    int score = 0;
+    if (hand[0].value + hand[1].value + hand[2].value + hand[3].value + hand[4].value == 15)
+    {
+        score += 2;
+    }
+}
