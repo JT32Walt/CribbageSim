@@ -3,30 +3,59 @@
 int scoreHand(std::vector<card> hand, card cutCard, bool fullScore, bool isCrib) //used to score the hand, used by evaluators
 {
     int score = 0;
-    if (isCrib && fullScore) // && fulscore implied
+    std::vector<card> combined;
+    if (fullScore) 
     {
-
+        for (const card& c : hand)
+        {
+            if (c.rank == JACK && c.suit == cutCard.suit)
+            {
+                score += 1;
+            }
+        }
+        combined = hand;
+        combined.emplace_back(cutCard);
+        if (allSameSuit(combined))
+        {
+            score += 5;
+        }
+        else if (allSameSuit(hand) && !isCrib)
+        {
+            score += 4;
+        }
     }
     else
     {
-        if (fullScore)
-        {
-
-        }
-        else
-        {
-            
-        }
+       if (allSameSuit(hand))
+       {
+        score += 4;
+       }
+       combined = hand;
     }
+    sortByRank(combined);
 
-    score += scoreSetsOfTwo(hand);
-    score += scoreSetsOfThree(hand);
-    score += scoreSetsOfFour(hand);
+    score += scoreSetsOfTwo(combined);
+    score += scoreSetsOfThree(combined);
+    score += scoreSetsOfFour(combined);
     if (fullScore)
     {
-        score += scoreSetsOfFive(hand);
+        score += scoreSetsOfFive(combined);
     }
     return score;
+}
+
+bool allSameSuit(std::vector<card> hand)
+{
+    int firstSuit = hand[0].suit;
+    for (const card& c : hand)
+    {
+        if (c.suit != firstSuit)
+        {
+            return false;
+        }
+    }
+    return true;
+
 }
 
 int scoreSetsOfTwo(std::vector<card> hand)
@@ -42,6 +71,7 @@ int scoreSetsOfTwo(std::vector<card> hand)
             }
         }
     }
+    return score;
 }
 
 int scoreSetsOfThree(std::vector<card> hand)
@@ -80,7 +110,7 @@ int scoreSetsOfFour(std::vector<card> hand)
     {
         for (int j = i + 1; j < size - 2; j++)
         {
-            for (int k = j + 1; j < size - 1; k++)
+            for (int k = j + 1; k < size - 1; k++)
             {
                 for (int l = k + 1;  l < size; l++)
                 {
@@ -99,6 +129,7 @@ int scoreSetsOfFour(std::vector<card> hand)
             }
         }
     }
+    return score;
 }
 
 int scoreSetsOfFive(std::vector<card> hand)
@@ -108,4 +139,16 @@ int scoreSetsOfFive(std::vector<card> hand)
     {
         score += 2;
     }
+    if (hand[1].rank == hand[0].rank + 1 && hand[2].rank == hand[1].rank + 1 && hand[3].rank == hand[2].rank + 1 && hand[4].rank == hand[3].rank + 1)
+    {
+        score += 5;
+    }
+    return score;
+}
+
+void sortByRank(std::vector<card>& hand)
+{
+    std::sort(hand.begin(), hand.end(), [](const card& a, const card& b){
+        return a.rank < b.rank;
+    });
 }
