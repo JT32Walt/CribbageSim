@@ -79,6 +79,7 @@ int scoreSetsOfThree(std::vector<card> hand)
     int score = 0;
     int size = hand.size();
     // there is not really not away to avoid the nesting
+    //i take that back its O(N^3) and really fucking slow
     for (int i = 0; i < size - 2; i++)
     {
         for (int j = i + 1; j < size - 1; j++)
