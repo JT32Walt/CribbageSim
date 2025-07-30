@@ -7,11 +7,11 @@
 int main() {
     
     std::vector<card> testhand;
-    card c1{HEARTS, 1, 1};
-    card c2{DIAMONDS, 1, 1};
-    card c3{DIAMONDS, 2, 2};
-    card c4{DIAMONDS, 3, 3};
-    card cut{HEARTS, 3, 3};
+    card c1{HEARTS, 5, 5};
+    card c2{DIAMONDS, 5, 5};
+    card c3{CLUBS, 5, 5};
+    card c4{SPADES, 11, 10};
+    card cut{SPADES, 5, 5};
     testhand.emplace_back(c1);
     testhand.emplace_back(c2);
     testhand.emplace_back(c3);
