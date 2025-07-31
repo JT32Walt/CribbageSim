@@ -17,16 +17,17 @@ class player
 private:
     unsigned int playerScore;
     std::vector<card> dealtCards;
-    std::vector<card> keptCards;
+    handCribStruct postEval;
     //HAS A choise strategy
     handevaluator* handStrategy;
     //HAS A pegging strategy
 public:
-    player(/* args */);
+    player(handevaluator* handStrat); //takes in hand strat and pegging strat
     ~player();
     void reset(); //clears the hand and score
     void evaluate(); //runs the evaluator
     std::vector<card> getHand();
+    std::vector<card> getCrib();
     void dealCard(card dealtCard);
     void addscore(int score);
     bool checkIfWon();

@@ -35,7 +35,7 @@ private:
     player p1;
     player p2;
     int winner = 0;
-    int curretCrib = 0;
+    int currentCrib = 0;
     std::vector<card> crib;
 
 

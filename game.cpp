@@ -1,4 +1,5 @@
 #include "game.h"
+#include "scorer.h"
 
 game::game() {
 
@@ -24,12 +25,12 @@ void game::resetGame()
 
         if (p1Card.value < p2Card.value)
         {
-            curretCrib = PLAYER1;
+            currentCrib = PLAYER1;
             break;
         }
         else if (p1Card.value > p2Card.value)
         {
-            curretCrib = PLAYER2;
+            currentCrib = PLAYER2;
             break;
         }
         mainDeck.shuffle();
@@ -51,11 +52,14 @@ void game::initializeRound()
     p2.evaluate();//call to eval here
     //put cards into crib
     //fuck it its 4 so just do it 4 times and not deal with the copy bullshit. You are going to see this later and hate it
-    crib.emplace_back();
-    crib.emplace_back();
-    crib.emplace_back();
-    crib.emplace_back();
+    std::vector<card> p1Crib = p1.getCrib();
+    std::vector<card> p2Crib = p2.getCrib();
+    crib.emplace_back(p1Crib[0]);
+    crib.emplace_back(p1Crib[1]);
+    crib.emplace_back(p2Crib[0]);
+    crib.emplace_back(p2Crib[1]);
     //sort the crib and their hands so we do not have to later, note for later, just use built in sort dumbass
+    sortByRank(crib);
 
 
     //do the cut
@@ -64,6 +68,22 @@ void game::initializeRound()
     if (cutCard.value == 11) 
     {
         //give score to whoevers crib it is
+        if (currentCrib == PLAYER1)
+        {
+            p1.addscore(2);
+            if (p1.checkIfWon())
+            {
+
+            }
+        }
+        else if (currentCrib == PLAYER2)
+        {
+            p2.addscore(2);
+            if (p2.checkIfWon())
+            {
+                
+            }
+        }
         //and i guess you have to check if anyone has won. actually everythime sobody scores you do. Method? Method
     }
 }
