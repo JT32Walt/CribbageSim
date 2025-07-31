@@ -1,7 +1,8 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
-#include <array>
+#include <vector>
+#include <iostream>
 
 
 enum suit {
@@ -9,6 +10,12 @@ enum suit {
     DIAMONDS,
     SPADES,
     CLUBS
+};
+
+enum faces {
+    JACK = 11,
+    QUEEN = 12,
+    KING = 13
 };
 
 struct card {
@@ -19,8 +26,14 @@ struct card {
 
 struct handCribStruct
 {
-    std::array<card, 4> keptCards;
-    std::array<card, 2> cribCards;
+    std::vector<card> keptCards;
+    std::vector<card> cribCards;
+
+    void print()
+    {
+        std::cout << "Kept: " << keptCards[0].rank << " " << keptCards[1].rank << " " << keptCards[2].rank << " " << keptCards[3].rank << std::endl;
+        std::cout << "Crib: " << cribCards[0].rank << " " << cribCards[1].rank << std::endl;
+    }
 };
 
 struct gameDataStruct

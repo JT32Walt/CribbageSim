@@ -1,6 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
-#include <array>
+#include <vector>
 #include "deck.h"
 #include "player.h"
 
@@ -36,7 +36,7 @@ private:
     player p2;
     int winner = 0;
     int curretCrib = 0;
-    std::array<card, 4> crib;
+    std::vector<card> crib;
 
 
 public:

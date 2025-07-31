@@ -1,10 +1,8 @@
 Recent Progess
-have changed card over to a struct, and made changes to keep the old behavior
-ran tests on deck to ensure it behaves properly
+SCORER DONE!!!!!
+RANDOM EVAL AND VIRTUAL HANDEVAL DONE!!!!
 
 TODO:
-write a scorer
-write a very basic handevaluator
 finish player functionality
 test player functionality
 

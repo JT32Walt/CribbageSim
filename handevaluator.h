@@ -1,12 +1,15 @@
 #ifndef HANDEVALUATOR_H
 #define HANDEVALUATOR_H
-#include <array>
+#include <vector>
+#include "structs.h"
 
 class handevaluator
 {
 
 public:
-    virtual std::array<card, 4> evaluateHand(std::array<card, 6> dealtCards);
+    handevaluator();
+    virtual handCribStruct evaluateHand(std::vector<card> dealtCards) = 0;
+    std::vector<handCribStruct> createAllPossiblilites(std::vector<card> dealtCards);
     virtual ~handevaluator();
 };
 #endif

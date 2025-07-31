@@ -8,3 +8,4 @@ player::~player()
 {
 }
 
+void player::evaluate()

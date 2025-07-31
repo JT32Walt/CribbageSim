@@ -3,7 +3,7 @@
 
 #include "handevaluator.h"
 #include "structs.h"
-#include <array>
+#include <vector>
 /*
     Player class
     has the hand of cards
@@ -16,19 +16,17 @@ class player
 {
 private:
     unsigned int playerScore;
-    std::array<card, 6> dealtCards;
-    std::array<card,6>::iterator dealtCardsIt = dealtCards.begin();
-    std::array<card, 4> keptCards;
-    int handScore = 0;
+    std::vector<card> dealtCards;
+    std::vector<card> keptCards;
     //HAS A choise strategy
-    handevaluator handStrategy;
+    handevaluator* handStrategy;
     //HAS A pegging strategy
 public:
     player(/* args */);
     ~player();
     void reset(); //clears the hand and score
-    handCribStruct evaluate(); //runs the evaluator
-    std::array<card,4> getHand();
+    void evaluate(); //runs the evaluator
+    std::vector<card> getHand();
     void dealCard(card dealtCard);
     void addscore(int score);
     bool checkIfWon();
