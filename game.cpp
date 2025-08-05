@@ -2,7 +2,9 @@
 #include "scorer.h"
 
 
-game::game() {
+game::game() 
+    :p1(nullptr, nullptr), p2(nullptr, nullptr)
+{
 
 }
 
@@ -79,18 +81,12 @@ void game::initializeRound()
         {
             //this check needs to become a method
             p1.addscore(2);
-            if (p1.checkIfWon())
-            {
-                //set a flag here i guess
-            }
+            winCheck();
         }
         else if (currentCrib == PLAYER2)
         {
             p2.addscore(2);
-            if (p2.checkIfWon())
-            {
-                //i guess set a flag here
-            }
+            winCheck();
         }
     }
 }
@@ -113,7 +109,25 @@ void game::runPegging()
 
         subfunctions: getValidCards(), checkForPoints(), 
     */
+
+    std::vector<card> playedCards;
+    int currentScore = 0;
+
+
 }
+
+void game::winCheck()
+{
+    if (p1.checkIfWon())
+    {
+        winner = PLAYER1;
+    }
+    else if (p2.checkIfWon())
+    {
+        winner = PLAYER2;
+    }
+}
+
 
 /*
 Likely implamentation of runGame()

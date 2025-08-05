@@ -1,7 +1,7 @@
 #include "player.h"
 
 player::player()
-    :handStrategy(nullptr)
+    :handStrategy(nullptr), peggingStrategy(nullptr)
 {
 
 }

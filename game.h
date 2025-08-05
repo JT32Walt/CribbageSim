@@ -49,6 +49,7 @@ public:
     void runPegging(); //runs the pegging phase
     void scoreHands(); //scores the hands in the proper orders and also checks for win
     bool addScoreToPlayer(int player, int score); //adds the score to the given player, and checks if they have won, this should be called anytime score is added
+    void winCheck();
     ~game();
 };
 

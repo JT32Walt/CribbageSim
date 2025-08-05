@@ -11,8 +11,6 @@
     keeps track of their current score
 */
 
-//TODO: Condence the returned hand and crib into a single struct to make this less painful
-
 class player
 {
 private:
