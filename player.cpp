@@ -17,9 +17,14 @@ player::~player()
     
 }
 
-void player::evaluate()
+void player::evaluateHand()
 {
     postEval = handStrategy->evaluateHand(dealtCards);
+}
+
+card player::evalutePegging(std::vector<card> currentHand, int currentScore, std::vector<card> playedCards)
+{
+    return peggingStrategy->evaluatePegging(currentHand, currentScore, playedCards);
 }
 
 void player::dealCard(card dealtCard)

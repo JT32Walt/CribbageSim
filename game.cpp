@@ -57,8 +57,8 @@ void game::initializeRound()
         p2.dealCard(mainDeck.drawFromTop());
     }    
     //run the evaluators
-    p1.evaluate();//call to eval here
-    p2.evaluate();//call to eval here
+    p1.evaluateHand();//call to eval here
+    p2.evaluateHand();//call to eval here
     //put cards into crib
     //fuck it its 4 so just do it 4 times and not deal with the copy bullshit. You are going to see this later and hate it
     std::vector<card> p1Crib = p1.getCrib();
@@ -112,8 +112,66 @@ void game::runPegging()
 
     std::vector<card> playedCards;
     int currentScore = 0;
+    std::vector<card> p1Hand = p1.getHand();
+    std::vector<card> p2Hand = p2.getHand();
+    playerPeggingStruct p1Struct {p1, p1Hand, false};
+    playerPeggingStruct p2Struct {p2, p2Hand, false};
+    playerPeggingStruct currentPlayer = currentCrib == PLAYER1 ? p2Struct : p1Struct;
+    playerPeggingStruct otherPlayer = currentCrib == PLAYER2 ? p1Struct : p2Struct;
+    
+    
 
+    while(!(p1Struct.hand.size()|p2Struct.hand.size())) //while someone has cards
+    {
+        //run the pegging evaluator
+        card chosenCard = currentPlayer.p.evalutePegging(p1Hand, currentScore, playedCards); //evaluate pegging will return a "null" card with value 0 if it has no valid moves
+        if (chosenCard.rank = 0) //cannot play so we give the other person a go
+        {
+            //give other player a point and foce a flag so that its there turn.
+            if (!otherPlayer.done)
+            {
+                otherPlayer.p.addscore(1);
+                winCheck();
+                if (!winner)
+                {
+                    break;
+                }
+            }
+            currentPlayer.done = true;
+            
+        }
+        else
+        {
+            playedCards.emplace_back(chosenCard);
+            currentScore += chosenCard.value;
+            removeCardFromHand(currentPlayer.hand, chosenCard);
 
+            //do card scoring here probably write a method for it
+        }
+
+        //current player switching logic
+        if (!otherPlayer.done)
+        {
+            playerPeggingStruct temp = currentPlayer;
+            currentPlayer = otherPlayer;
+            otherPlayer = temp;
+        }
+        //stuff to reset, still need to swap though
+        if (currentPlayer.done && otherPlayer.done)
+        {
+            currentScore = 0;
+            playerPeggingStruct temp = currentPlayer;
+            currentPlayer = otherPlayer;
+            otherPlayer = temp;
+        }
+    }
+}
+
+void game::removeCardFromHand(std::vector<card> hand, card selectedCard)
+{
+    hand.erase(std::remove_if(hand.begin(), hand.end(),
+        [&selectedCard](const card& c){ return c.suit == selectedCard.suit && c.rank == selectedCard.rank;}),
+        hand.end());
 }
 
 void game::winCheck()

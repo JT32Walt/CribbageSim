@@ -26,13 +26,15 @@ public:
     player();
     ~player();
     void reset(); //clears the hand and score
-    void evaluate(); //runs the evaluator
+    void evaluateHand(); //runs the evaluator
+    card evalutePegging(std::vector<card> currentHand, int currentScore, std::vector<card> playedCards);
     std::vector<card> getHand();
     std::vector<card> getCrib();
     void dealCard(card dealtCard);
     void addscore(int score);
     bool checkIfWon();
 };
+
 
 
 
