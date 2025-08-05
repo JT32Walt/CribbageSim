@@ -4,6 +4,8 @@
 #include "deck.h"
 #include "player.h"
 
+
+
 /*
     GAME CLASS
 
@@ -41,7 +43,7 @@ private:
 
 public:
     game() = default;
-    game(handevaluator* p1Hand, handevaluator* p2Hand);
+    game(handevaluator* p1Hand, handevaluator* p2Hand, peggingevaluator* p1Peg, peggingevaluator* p2Peg);
     void resetGame(); //game initalization
     void initializeRound(); //deals cards, generates cut, runs hand evaluation and sets the crib up
     void runPegging(); //runs the pegging phase

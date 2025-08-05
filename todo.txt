@@ -1,13 +1,11 @@
 Recent Progess
 SCORER DONE!!!!!
 RANDOM EVAL AND VIRTUAL HANDEVAL DONE!!!!
+PLAYER WRITTEN AND TESTED!!!!
 
 TODO:
-finish player functionality
-test player functionality
-
-test and fix the current written game functionality
-write the necessary things for pegging, scoring, and win checking
+pegging & pegging eval
+probably a rewirte of most of the game class
 extenisve testing of games
 
 inplament data collection

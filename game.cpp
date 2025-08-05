@@ -1,14 +1,15 @@
 #include "game.h"
 #include "scorer.h"
 
+
 game::game() {
 
 }
 
-game::game(handevaluator* p1Hand, handevaluator* p2Hand)
+game::game(handevaluator* p1Hand, handevaluator* p2Hand, peggingevaluator* p1Peg, peggingevaluator* p2Peg)
 {
-    player p1(p1Hand);
-    player p2(p2Hand);   
+    player p1(p1Hand, p1Peg);
+    player p2(p2Hand, p2Peg);   
 }
 
 game::~game() {

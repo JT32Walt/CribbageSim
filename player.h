@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "handevaluator.h"
+#include "peggingevaluator.h"
 #include "structs.h"
 #include <vector>
 /*
@@ -21,8 +22,9 @@ private:
     //HAS A choise strategy
     handevaluator* handStrategy;
     //HAS A pegging strategy
+    peggingevaluator* peggingStrategy;
 public:
-    player(handevaluator* handStrat); //takes in hand strat and pegging strat
+    player(handevaluator* handStrat, peggingevaluator* peggingStrat); //takes in hand strat and pegging strat
     player();
     ~player();
     void reset(); //clears the hand and score

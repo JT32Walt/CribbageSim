@@ -6,8 +6,8 @@ player::player()
 
 }
 
-player::player(handevaluator* handStrat)
-    : handStrategy(handStrat)
+player::player(handevaluator* handStrat, peggingevaluator* pegStrat)
+    : handStrategy(handStrat), peggingStrategy(pegStrat)
 {
     
 }
