@@ -1,14 +1,20 @@
 #include "player.h"
 
-player::player(handevaluator* handStrat)
+player::player()
+    :handStrategy(nullptr)
 {
-    handStrategy = handStrat;
-    //pegging strategy = peggingstrat
+
+}
+
+player::player(handevaluator* handStrat)
+    : handStrategy(handStrat)
+{
+    
 }
 
 player::~player()
 {
-    delete handStrategy;
+    
 }
 
 void player::evaluate()
@@ -18,7 +24,7 @@ void player::evaluate()
 
 void player::dealCard(card dealtCard)
 {
-    dealtCards.emplace_back(dealCard);
+    dealtCards.emplace_back(dealtCard);
 }
 
 void player::addscore(int score)
@@ -43,4 +49,10 @@ bool player::checkIfWon()
         return true;
     }
     return false;
+}
+
+void player::reset()
+{
+    dealtCards.clear();
+    playerScore = 0;
 }

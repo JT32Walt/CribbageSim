@@ -23,6 +23,7 @@ private:
     //HAS A pegging strategy
 public:
     player(handevaluator* handStrat); //takes in hand strat and pegging strat
+    player();
     ~player();
     void reset(); //clears the hand and score
     void evaluate(); //runs the evaluator

@@ -5,6 +5,12 @@ game::game() {
 
 }
 
+game::game(handevaluator* p1Hand, handevaluator* p2Hand)
+{
+    player p1(p1Hand);
+    player p2(p2Hand);   
+}
+
 game::~game() {
 
 }
@@ -70,10 +76,11 @@ void game::initializeRound()
         //give score to whoevers crib it is
         if (currentCrib == PLAYER1)
         {
+            //this check needs to become a method
             p1.addscore(2);
             if (p1.checkIfWon())
             {
-
+                //set a flag here i guess
             }
         }
         else if (currentCrib == PLAYER2)
@@ -81,10 +88,9 @@ void game::initializeRound()
             p2.addscore(2);
             if (p2.checkIfWon())
             {
-                
+                //i guess set a flag here
             }
         }
-        //and i guess you have to check if anyone has won. actually everythime sobody scores you do. Method? Method
     }
 }
 

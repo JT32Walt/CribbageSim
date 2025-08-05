@@ -22,6 +22,11 @@ struct card {
     int suit; //uses suit enum
     int rank; //card rank: 1-13 (used for run detection and sorting)
     int value; //card points value: 1-10
+
+    void print()
+    {
+        std::cout << "Suit: " << suit << "Rank: " << rank << "      ";
+    }
 };
 
 struct handCribStruct

@@ -40,7 +40,8 @@ private:
 
 
 public:
-    game(/* args */);
+    game() = default;
+    game(handevaluator* p1Hand, handevaluator* p2Hand);
     void resetGame(); //game initalization
     void initializeRound(); //deals cards, generates cut, runs hand evaluation and sets the crib up
     void runPegging(); //runs the pegging phase

@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra -g
 
 # Source files
-SRCS = main.cpp deck.cpp scorer.cpp randomevaluator.cpp handevaluator.cpp
+SRCS = main.cpp deck.cpp scorer.cpp randomevaluator.cpp handevaluator.cpp player.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Output binary (Windows executable)
