@@ -17,7 +17,9 @@ int main() {
     randompeggingevaluator* p2PegEval = new randompeggingevaluator();
 
     game testGame(p1Eval, p2Eval, p1PegEval, p2PegEval);
+    testGame.resetGame();
     testGame.initializeRound();
+    testGame.runPegging();
 
 
     

@@ -25,7 +25,7 @@ struct card {
 
     void print()
     {
-        std::cout << "Suit: " << suit << "Rank: " << rank << "      ";
+        std::cout << "Suit: " << suit << "  Rank: " << rank << "      ";
     }
 };
 

@@ -1,5 +1,6 @@
 #include "game.h"
 #include "scorer.h"
+#include <iostream>
 
 
 game::game() 
@@ -94,7 +95,9 @@ void game::initializeRound()
     for (card c : crib)
     {
         c.print();
+        
     }
+    std::cout << std::endl;
     #endif
 }
 
@@ -123,58 +126,112 @@ void game::runPegging()
     std::vector<card> p2Hand = p2.getHand();
     playerPeggingStruct p1Struct {p1, p1Hand, false};
     playerPeggingStruct p2Struct {p2, p2Hand, false};
-    playerPeggingStruct& currentPlayer = currentCrib == PLAYER1 ? p2Struct : p1Struct;
-    playerPeggingStruct& otherPlayer = currentCrib == PLAYER2 ? p1Struct : p2Struct;
-    
-    
+    playerPeggingStruct* currentPlayer;
+    playerPeggingStruct* otherPlayer;
 
-    while(!(p1Struct.hand.size()||p2Struct.hand.size())) //while someone has cards
+    if (currentCrib == PLAYER1)
+    {
+        currentPlayer = &p2Struct;
+        otherPlayer = &p1Struct;
+    }
+    else if (currentCrib == PLAYER2)
+    {
+        currentPlayer = &p1Struct;
+        otherPlayer = &p2Struct;
+    }
+    
+    #ifdef DEBUG
+    std::cout << "P1 HAND: ";
+    for (card c : p1Hand)
+    {
+        c.print();
+        
+    }
+    std::cout << std::endl;
+    std::cout << "P2 HAND: ";
+    for (card c : p2Hand)
+    {
+        c.print();
+    }
+    std::cout << std::endl;
+    #endif
+
+    while((p1Struct.hand.size()||p2Struct.hand.size())) //while someone has cards
     {
         //run the pegging evaluator
-        card chosenCard = currentPlayer.p.evalutePegging(p1Hand, currentScore, playedCards); //evaluate pegging will return a "null" card with value 0 if it has no valid moves
+        card chosenCard = currentPlayer->p.evalutePegging(currentPlayer->hand, currentScore, playedCards); //evaluate pegging will return a "null" card with value 0 if it has no valid moves
         if (chosenCard.rank == 0) //cannot play so we give the other person a go
         {
             //give other player a point and foce a flag so that its there turn.
-            if (!otherPlayer.done)
+            if (!otherPlayer->done)
             {
-                otherPlayer.p.addscore(1);
+                otherPlayer->p.addscore(1);
                 winCheck();
                 if (winner)
                 {
                     break;
                 }
+                #ifdef DEBUG
+                std::cout << "Go given\n";
+                #endif
             }
-            currentPlayer.done = true;
+            currentPlayer->done = true;
             
         }
         else
         {
             playedCards.emplace_back(chosenCard);
             currentScore += chosenCard.value;
-            removeCardFromHand(currentPlayer.hand, chosenCard);
+            removeCardFromHand(currentPlayer->hand, chosenCard);
+            #ifdef DEBUG
+            chosenCard.print();
+            std::cout << currentScore << std::endl;
+            #endif
+            if (currentPlayer->hand.size() == 0)
+            {
+                currentPlayer->done = true;
+            }
 
             //do card scoring here probably write a method for it or reusing scoring things 
         }
 
         //current player switching logic
-        if (!otherPlayer.done)
+        if (!otherPlayer->done)
         {
-            playerPeggingStruct temp = currentPlayer;
+            playerPeggingStruct* temp = currentPlayer;
             currentPlayer = otherPlayer;
             otherPlayer = temp;
         }
         //stuff to reset, still need to swap though
-        if (currentPlayer.done && otherPlayer.done)
+        if (currentPlayer->done && otherPlayer->done)
         {
             currentScore = 0;
-            playerPeggingStruct temp = currentPlayer;
+            playerPeggingStruct* temp = currentPlayer;
             currentPlayer = otherPlayer;
             otherPlayer = temp;
+            playedCards.clear();
+            currentPlayer->done = false;
+            otherPlayer->done = false;
         }
     }
+    #ifdef DEBUG
+    std::cout << "P1 HAND: ";
+    for (card c : p1Struct.hand)
+    {
+        c.print();
+        
+    }
+    std::cout << std::endl;
+    std::cout << "P2 HAND: ";
+    for (card c : p2Struct.hand)
+    {
+        c.print();
+    }
+    std::cout << std::endl;
+    #endif
 }
 
-void game::removeCardFromHand(std::vector<card> hand, card selectedCard)
+void game::removeCardFromHand(std::vector<card>& hand, card selectedCard)
 {
     hand.erase(std::remove_if(hand.begin(), hand.end(),
         [&selectedCard](const card& c){ return c.suit == selectedCard.suit && c.rank == selectedCard.rank;}),

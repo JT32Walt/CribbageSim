@@ -47,7 +47,7 @@ public:
     void resetGame(); //game initalization
     void initializeRound(); //deals cards, generates cut, runs hand evaluation and sets the crib up
     void runPegging(); //runs the pegging phase
-    void removeCardFromHand(std::vector<card> hand, card selectedCard);
+    void removeCardFromHand(std::vector<card>& hand, card selectedCard);
     void scoreHands(); //scores the hands in the proper orders and also checks for win
     bool addScoreToPlayer(int player, int score); //adds the score to the given player, and checks if they have won, this should be called anytime score is added
     void winCheck();
