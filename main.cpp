@@ -6,34 +6,18 @@
 #include "player.h"
 #include "randomevaluator.h"
 #include "handevaluator.h"
+#include "peggingevaluator.h"
+#include "randompeggingevaluator.h"
+#include "game.h"
 
 int main() {
-    deck testDeck;
-    randomevaluator* testEval = new(randomevaluator);
-    player testPlayer(testEval);
-    testDeck.shuffle();
+    randomevaluator* p1Eval = new randomevaluator();
+    randomevaluator* p2Eval = new randomevaluator();
+    randompeggingevaluator* p1PegEval = new randompeggingevaluator();
+    randompeggingevaluator* p2PegEval = new randompeggingevaluator();
 
-    for (int i = 0; i < 6; i++)
-    {
-        testPlayer.dealCard(testDeck.drawFromTop());
-    }
-
-    testPlayer.evaluate();
-    
-    std::vector<card> testPlayerHand = testPlayer.getHand();
-    std::vector<card> testPlayerCrib = testPlayer.getCrib();
-
-    for (card c : testPlayerHand)
-    {
-        c.print();
-    }
-    std::cout << std::endl;
-
-    for (card c : testPlayerCrib)
-    {
-        c.print();
-    }
-    std::cout << std::endl;
+    game testGame(p1Eval, p2Eval, p1PegEval, p2PegEval);
+    testGame.initializeRound();
 
 
     

@@ -9,9 +9,9 @@ game::game()
 }
 
 game::game(handevaluator* p1Hand, handevaluator* p2Hand, peggingevaluator* p1Peg, peggingevaluator* p2Peg)
+    :p1(p1Hand, p1Peg), p2(p2Hand, p2Peg)
 {
-    player p1(p1Hand, p1Peg);
-    player p2(p2Hand, p2Peg);   
+
 }
 
 game::~game() {
@@ -89,6 +89,13 @@ void game::initializeRound()
             winCheck();
         }
     }
+
+    #ifdef DEBUG
+    for (card c : crib)
+    {
+        c.print();
+    }
+    #endif
 }
 
 
