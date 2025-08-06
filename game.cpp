@@ -116,23 +116,23 @@ void game::runPegging()
     std::vector<card> p2Hand = p2.getHand();
     playerPeggingStruct p1Struct {p1, p1Hand, false};
     playerPeggingStruct p2Struct {p2, p2Hand, false};
-    playerPeggingStruct currentPlayer = currentCrib == PLAYER1 ? p2Struct : p1Struct;
-    playerPeggingStruct otherPlayer = currentCrib == PLAYER2 ? p1Struct : p2Struct;
+    playerPeggingStruct& currentPlayer = currentCrib == PLAYER1 ? p2Struct : p1Struct;
+    playerPeggingStruct& otherPlayer = currentCrib == PLAYER2 ? p1Struct : p2Struct;
     
     
 
-    while(!(p1Struct.hand.size()|p2Struct.hand.size())) //while someone has cards
+    while(!(p1Struct.hand.size()||p2Struct.hand.size())) //while someone has cards
     {
         //run the pegging evaluator
         card chosenCard = currentPlayer.p.evalutePegging(p1Hand, currentScore, playedCards); //evaluate pegging will return a "null" card with value 0 if it has no valid moves
-        if (chosenCard.rank = 0) //cannot play so we give the other person a go
+        if (chosenCard.rank == 0) //cannot play so we give the other person a go
         {
             //give other player a point and foce a flag so that its there turn.
             if (!otherPlayer.done)
             {
                 otherPlayer.p.addscore(1);
                 winCheck();
-                if (!winner)
+                if (winner)
                 {
                     break;
                 }
@@ -146,7 +146,7 @@ void game::runPegging()
             currentScore += chosenCard.value;
             removeCardFromHand(currentPlayer.hand, chosenCard);
 
-            //do card scoring here probably write a method for it
+            //do card scoring here probably write a method for it or reusing scoring things 
         }
 
         //current player switching logic
